@@ -57,7 +57,7 @@ class Client implements ClientInterface {
         try {
             $response = $this->getHttpClient()->get("$method/{$this->token}", ['query' => $params]);
         } catch(GuzzleException $e) {
-            throw new Exception\HttpException("HTTP Error: {$e->getMessage()}", $e->getCode(), $e);
+            throw new Exception\HttpException($e->getMessage(), $e->getCode(), $e);
         }
 
         $data = json_decode($response->getBody()->getContents(), true);

@@ -61,29 +61,19 @@ class Recommendation {
      *
      * Можно фильтровать по категории или производителю.
      *
-     * @param string $categoryIds - идентификатор товарной категории магазина. Используйте значение 0 для всего каталога магазина.
+     * @param string|array $categoryIds - идентификатор товарной категории магазина. Используйте значение 0 для всего каталога магазина.
      * @param string $vendor - название бренда. Должен совпадать со значением поля vendor в YML или Product API.
      * @return Response
      */
     public function popular($categoryIds, $vendor = null)
     {
-        $params = ['categoryIds' => $categoryIds];
+        $params = ['categoryIds' => implode(',', (array) $categoryIds)];
 
         if($vendor) {
             $params['vendor'] = $vendor;
         }
 
         return $this->request('popular', $params);
-    }
-
-    /**
-     * Новинки магазина, персонализированные для пользователя
-     * @param $session - анонимизированный идентификатор пользователя. Содержится в cookie rcuid.
-     * @return Response
-     */
-    public function latest($session)
-    {
-        return $this->request('latest', ['session' => $session]);
     }
 
     /**
