@@ -8,7 +8,7 @@ class Response implements \Iterator, \Countable {
     /**
      * @var Item[]
      */
-    protected $items;
+    protected $items = [];
 
     /**
      * @param array $data
