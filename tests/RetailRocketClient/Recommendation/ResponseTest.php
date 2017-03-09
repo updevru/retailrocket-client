@@ -23,4 +23,16 @@ class ResponseTest extends BaseTest {
             $this->assertTrue($item instanceof Item);
         }
     }
+
+    public function testEmptyResponse()
+    {
+        $response = new Recommendation\Response([]);
+
+        $iterate = false;
+        foreach($response as $item) {
+            $iterate = true;
+        }
+
+        $this->assertFalse($iterate);
+    }
 } 
