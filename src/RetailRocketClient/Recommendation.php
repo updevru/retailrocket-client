@@ -129,11 +129,14 @@ class Recommendation {
      *
      * @param array $itemIds - идентификатор товара для которого нужно получитьрекомендации.
      *                       Должен совпадать с ID, передаваемым в мета-данных о товаре.
+     * @param array $params - дополнительные параметры
      * @return Response
      */
-    public function related(array $itemIds)
+    public function related(array $itemIds, array $params = [])
     {
-        return $this->request('related', ['itemIds' => implode(',', $itemIds)]);
+        $params = array_merge(['itemIds' => implode(',', $itemIds)], $params);
+
+        return $this->request('related', $params);
     }
 
     /**
